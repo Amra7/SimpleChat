@@ -29,18 +29,22 @@ public class SockertConnector {
 		// klijentu Socket moramo predati i adresu i port
 		Socket client = new Socket(serverAdress, port);
 
-		SocketReadWrite srw = new SocketReadWrite(client.getInputStream(),
+		SocketReadWrite sc = new SocketReadWrite(client.getInputStream(),
 				client.getOutputStream());
 		
-		System.out.println("Odgovori: ");
 		Scanner line = new Scanner(System.in);
-		String lineClient = line.nextLine();
+		while ( true){
+			String message = sc.getMessage();
+			System.out.println("Odgovori: ");
+			
+			String lineClient = line.nextLine();
+			
+			sc.sendMessage(lineClient);
+			System.out.println(sc.getMessage());
+			client.close();
+		}
 		
-		srw.sendMessage(lineClient);
-		System.out.println(srw.getMessage());
-
-		System.out.println("Gotovo!");
-		client.close();
+		
 
 	}
 

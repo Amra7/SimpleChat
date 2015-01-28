@@ -27,19 +27,24 @@ public class Server {
 				Scanner line = new Scanner(System.in);
 				
 				while (true){
-					String message = line.nextLine();
-					System.out.println(sc.getMessage());
+					System.out.println("Server: ");
+					
+					String msgServer = line.nextLine();
+					sc.sendMessage(msgServer);
+					
+					
+					String message = sc.getMessage();
+					System.out.println(message);
+				
 					System.out.println("Unesi poruku: ");
-					Scanner serverLine = new Scanner(System.in);
-									
-					String msgServer = serverLine.nextLine();
+													
+					
 					sc.sendMessage(msgServer);
 					 if( line.equals("quit")){
 						 break;
 					 }
 				}
-				
-
+				client.close();
 				
 				System.out.println(sc.getMessage());
 			}
